@@ -1,7 +1,4 @@
-/* eslint-disable linebreak-style */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-vars */
-/* eslint-disable class-methods-use-this */
 const ClientError = require('../../exceptions/ClientError');
 
 class NotesHandler {
@@ -97,9 +94,10 @@ class NotesHandler {
   async putNoteByIdHandler(request, h) {
     try {
       this._validator.validateNotePayload(request.payload);
+      const { title, body, tags } = request.payload;
       const { id } = request.params;
 
-      await this._service.editNoteById(id, request.payload);
+      await this._service.editNoteById(id, { title, body, tags });
 
       return {
         status: 'success',
